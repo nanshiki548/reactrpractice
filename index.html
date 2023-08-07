@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>いいねボタン</title>
+        <script 
+            crossorigin
+            src="https://unpkg.com/react@17/umd/react.development.js"
+        ></script>
+        <script
+            crossorigin
+            src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+        ></script>
+        <script
+            src="https://unpkg.com/babel-standalone@6/babel.min.js"
+        ></script>
+    </head>
+    <body>
+        <!--Reactコンポーネントが表示されるDOMコンテナ-->
+        <div id="likesButtonContainer"></div>
+
+        <script type="text/babel">
+            //いいねと表示されるだけのLikeButtonコンポーネント
+            //コンポーネント名　＝ 関数名は必ずアシラ文字を大文字にする
+            //(アッパーキャメルケース記法)
+            const LikeButton = () => {
+                //useState()でstateの管理
+                //likedに、いいね前(false)か、いいね済(true)どちらかの状態を持たせている
+                //likedの初期状態はfalse
+                //CDNでuseState()を利用したい場合、React.useState()と書く
+                const [liked, setliked] = React.useState(false);
+
+                //いいね前といいね済みがトグルする関数toggleLikedを定義
+                const toggleLiked = () => setliked(!liked);
+                return (
+                    //ボタンをクリックすると、trueとfalseがトグルする
+                    <button className="likeButton" onClick={toggleLiked}>
+                        {/*三項演算子でlikedの状態がtureならば「いいね済み」falseならば「いいね前」が表示される*/}
+                        {liked ? "いいね済み" : "いいね前"}
+                    </button>
+                );
+            };
+
+            //domContainerを定義
+            const domContainer = document.querySelector("#likesButtonContainer");
+            //ReacteactがLikeButtonコンポーネントをDOMに変換してHTMLのDOMコンテナに挿入する
+            ReactDOM.render(<LikeButton />, domContainer);
+        </script>
+    </body>
+</html>

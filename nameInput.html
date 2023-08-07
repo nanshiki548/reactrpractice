@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>NameInput</title>
+        <script 
+            crossorigin
+            src="https://unpkg.com/react@17/umd/react.development.js"
+        ></script>
+        <script
+            crossorigin
+            src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+        ></script>
+        <script
+            src="https://unpkg.com/babel-standalone@6/babel.min.js"
+        ></script>
+    </head>
+    <body>
+        <!--Reactコンポーネントが表示されるDOMコンテナ-->
+        <div id="nameInputContainer"></div>
+
+        <script type="text/babel">
+            const NameInput = () => {
+                //nameにinputテキスト入力エリアへの状態を持たせている
+                const [name, setName] = React.useState("〇〇");
+                
+                //入力値を現在の状態nameにセットする関数handleOnchangeを定義
+                const handleOnChange = (event) => setName(event.target.value);
+
+                return(
+                    <div>
+                    {/*入力したテキストの状態をsetNameで現在の状態であるnameにセット*/}
+                    {/*入力したテキストの状態をnameに保持させている*/}
+                    <input type="text" onChange={handleOnChange} />
+                    {/*現在のnameの状態を表示*/}
+                    <p>こんにちは{name}さん</p>
+                    </div>
+                );
+            };
+
+            //domContainerを定義
+            const domContainer = document.querySelector("#nameInputContainer");
+            //ReacteactがLikeButtonコンポーネントをDOMに変換してHTMLのDOMコンテナに挿入する
+            ReactDOM.render(<NameInput />, domContainer);
+        </script>
+    </body>
+</html>
